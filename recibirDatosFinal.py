@@ -38,8 +38,7 @@ radio.startListening()
 
 tabla = 'invernadero_1'
 
-# Crear objeto csv_writer para escribir en el archivo CSV
-csv_file = open('datos.csv', 'w', newline='')
+csv_file = open('datos.csv', 'a', newline='')
 csv_writer = csv.writer(csv_file)
 
 while True:
@@ -66,6 +65,7 @@ while True:
         cur.execute(insert_query, ('1', temp, hum_suelo, '1', hum))
         conn.commit()
         csv_writer.writerow(('1', temp, hum_suelo, '1', hum, fecha_actual))
+        csv_file.flush()
         time.sleep(4)
     except KeyboardInterrupt:
         print("\n[INTERRUPT] Interrupción del teclado detectada. Cerrando conexión")
